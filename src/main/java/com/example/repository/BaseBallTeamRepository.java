@@ -31,24 +31,34 @@ public class BaseBallTeamRepository {
 		  baseBallTeam.setLeagueName(rs.getString("league_name"));
 		  baseBallTeam.setTeamName(rs.getString("team_name"));
 		  baseBallTeam.setHeadquarters(rs.getString("headquarters"));
-		  baseBallTeam.setInauguration(rs.getDate("inaugration"));
+		  baseBallTeam.setInauguration(rs.getString("inauguration"));
 		  baseBallTeam.setHistory(rs.getString("history"));
 		  	  
 		  return baseBallTeam;
 	  };
 	  
-	  public List<BaseBallTeam> findAll(){
+	 /**
+	  * 全件検索.
+	  * 
+	 * @return全ての野球チーム
+	 */
+	public List<BaseBallTeam> findAll(){
 		  
-		  String sql = "SELECT id,league_name,team_name,headquarters,inaugration,history FROM teams";
+		  String sql = "SELECT id,league_name,team_name,headquarters,inauguration,history FROM teams ORDER BY inauguration ";
 		  List<BaseBallTeam> baseBallTeamList = template.query(sql, BASEBALLTEAM_ROW_MAPPER);
 		  
 		  return baseBallTeamList;
 	  }
 	  
 	  
-	  public BaseBallTeam load(int id) {
+	  /**
+	   * ID検索.
+	 * @param id　検索したいID
+	 * @return 検索された野球チーム
+	 */
+	public BaseBallTeam load(int id) {
 		  
-		  String sql = "SELECT id,league_name,team_name,headquarters,inaugration,history FROM teams WHERE id=:id";
+		  String sql = "SELECT id,league_name,team_name,headquarters,inauguration,history FROM teams WHERE id=:id";
 		  SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		  BaseBallTeam baseBallTeam = template.queryForObject(sql, param, BASEBALLTEAM_ROW_MAPPER);
 		  
