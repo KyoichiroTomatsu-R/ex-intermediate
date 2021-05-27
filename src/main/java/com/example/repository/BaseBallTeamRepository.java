@@ -40,7 +40,7 @@ public class BaseBallTeamRepository {
 	 /**
 	  * 全件検索.
 	  * 
-	 * @return全ての野球チーム
+	 * @return　全ての野球チーム
 	 */
 	public List<BaseBallTeam> findAll(){
 		  
